@@ -143,9 +143,3 @@ def drive_manager(auth_manager):
     """Provide a DriveManager wired to a fake Drive service."""
     return DriveManager(auth_manager.get_drive_service())
 
-﻿import pytest
-import sys
-from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
-
