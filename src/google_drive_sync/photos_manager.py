@@ -8,7 +8,11 @@ import os
 import logging
 from datetime import datetime
 from pathlib import Path
-from typing import Any, TypedDict, NotRequired
+from typing import Any
+try:
+    from typing import TypedDict, NotRequired  # Python 3.11+
+except ImportError:
+    from typing_extensions import TypedDict, NotRequired  # Python 3.10
 
 import requests
 from googleapiclient.discovery import Resource

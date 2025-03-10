@@ -6,9 +6,9 @@ This script tests the basic functionality without running the full sync
 
 import os
 import sys
-from auth_manager import AuthManager
-from drive_manager import DriveManager
-from photos_manager import PhotosManager
+from google_drive_sync.auth_manager import AuthManager
+from google_drive_sync.drive_manager import DriveManager
+from google_drive_sync.photos_manager import PhotosManager
 
 
 def test_authentication():

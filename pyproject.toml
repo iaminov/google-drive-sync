@@ -1,48 +1,26 @@
-﻿[build-system    "google-auth>=2.23.4",
-    "Pillow>=10.1.0",
-    "python-dateutil>=2.8.2",
-    "requests>=2.31.0"
-    "mypy>=1.10",
-    "ruff>=0.5.0",
-    "black>=24.3.0",
-]
-requires = ["setuptools>=68", "wheel"    "google-auth>=2.23.4",
-    "Pillow>=10.1.0",
-    "python-dateutil>=2.8.2",
-    "requests>=2.31.0"
-    "mypy>=1.10",
-    "ruff>=0.5.0",
-    "black>=24.3.0",
-]
+[build-system]
+requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
-[project    "google-auth>=2.23.4",
-    "Pillow>=10.1.0",
-    "python-dateutil>=2.8.2",
-    "requests>=2.31.0"
-    "mypy>=1.10",
-    "ruff>=0.5.0",
-    "black>=24.3.0",
-]
+[project]
 name = "google-drive-photos-sync"
 version = "2.0.0"
-
-
 description = "Sync media files between Google Drive and Google Photos"
 readme = "README.md"
 requires-python = ">=3.10"
-
-
-authors = [{name = "iaminov", email = "iaminov@users.noreply.github.com"}    "google-auth>=2.23.4",
-    "Pillow>=10.1.0",
-    "python-dateutil>=2.8.2",
-    "requests>=2.31.0"
-    "mypy>=1.10",
-    "ruff>=0.5.0",
-    "black>=24.3.0",
-]
+authors = [{name = "iaminov", email = "iaminov@users.noreply.github.com"}]
 license = {text = "MIT"}
-
+keywords = ["google-drive", "google-photos", "sync", "media"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
 
 dependencies = [
     "google-api-python-client>=2.108.0",
@@ -51,80 +29,69 @@ dependencies = [
     "google-auth>=2.23.4",
     "Pillow>=10.1.0",
     "python-dateutil>=2.8.2",
-    "requests>=2.31.0"
-    "mypy>=1.10",
-    "ruff>=0.5.0",
-    "black>=24.3.0",
+    "requests>=2.31.0",
+    "typing-extensions>=4.0.0",
 ]
 
-
-
-
-[project.scripts    "mypy>=1.10",
-    "ruff>=0.5.0",
-    "black>=24.3.0",
-]
-gdpsync = "google_drive_sync.app:main"
-
-
-
-[tool.setuptools.packages.find    "mypy>=1.10",
-    "ruff>=0.5.0",
-    "black>=24.3.0",
-]
-where = ["src"    "mypy>=1.10",
-    "ruff>=0.5.0",
-    "black>=24.3.0",
-]
-
-
-
-[project.optional-dependencies    "mypy>=1.10",
-    "ruff>=0.5.0",
-    "black>=24.3.0",
-]
+[project.optional-dependencies]
 dev = [
     "pytest>=8.0",
     "pytest-cov>=4.1",
+    "pytest-mock>=3.12",
     "mypy>=1.10",
+    "types-requests",
     "ruff>=0.5.0",
     "black>=24.3.0",
+    "isort>=5.13.2",
+    "pre-commit>=3.7.0",
 ]
 
+[project.scripts]
+gdpsync = "google_drive_sync.app:main"
 
+[project.urls]
+Homepage = "https://github.com/iaminov/google-drive-sync"
+Issues = "https://github.com/iaminov/google-drive-sync/issues"
 
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+google_drive_sync = ["py.typed"]
 
 [tool.ruff]
 line-length = 100
 target-version = "py310"
-
-
+select = ["E", "F", "W", "I", "N", "UP", "B", "C4", "SIM"]
+ignore = ["E501"]
 
 [tool.black]
 line-length = 100
 target-version = ["py310"]
 
-
-
 [tool.isort]
 profile = "black"
 line_length = 100
 
-
-
 [tool.mypy]
 python_version = "3.10"
 ignore_missing_imports = true
-
-
+warn_return_any = true
+warn_unused_configs = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]
-
-
+addopts = "-ra -q --strict-markers"
 
 [tool.coverage.run]
 source = ["src/google_drive_sync"]
-omit = ["*/tests/*"]
+omit = ["*/tests/*", "*/__init__.py"]
 
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
